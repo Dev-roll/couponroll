@@ -29,7 +29,7 @@ CREATE TABLE `stores` (
   `name` varchar(255) NOT NULL,
   `description` text CHARACTER SET utf8mb4 COLLATE utf8mb4_bin,
   `is_public` tinyint(1) NOT NULL DEFAULT 1,
-  `icon_url` char(255) NOT NULL DEFAULT 'https://avatars.githubusercontent.com/u/112330481?s=400&u=34b97ce454c3a61d7647cdb147cb207322242319&v=4',
+  `icon_url` varchar(255) NOT NULL DEFAULT 'https://avatars.githubusercontent.com/u/112330481?s=400&u=34b97ce454c3a61d7647cdb147cb207322242319&v=4',
   `img_url` varchar(255) NOT NULL DEFAULT 'https://avatars.githubusercontent.com/u/112330481?s=400&u=34b97ce454c3a61d7647cdb147cb207322242319&v=4',
   `creator_id` char(36) NOT NULL,
   `created_at` datetime(6) DEFAULT NULL,
