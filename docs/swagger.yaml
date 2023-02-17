@@ -1,0 +1,657 @@
+openapi: 3.0.3
+info:
+  title: couponroll
+  description: API for couponroll
+  version: 0.0.0
+tags:
+  - name: users
+    description: API for users
+  - name: me
+    description: API for me
+  - name: stores
+    description: API for stores
+  - name: coupons
+    description: API for coupons
+  - name: items
+    description: API for items
+  - name: authentication
+    description: API for authentication
+  - name: favorite_stores
+    description: API for favorite_stores
+paths:
+  "/user/me":
+    get:
+      tags:
+        - me
+      summary: Get authenticated user
+      description: ""
+      operationId: getAuthenticatedUser
+      parameters: []
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/User"
+    patch:
+      tags:
+        - me
+      summary: Update authenticated user
+      description: ""
+      operationId: updateAuthenticatedUser
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/User"
+      responses:
+        "200":
+          description: OK
+        "304":
+          description: Not modified
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+  "/users/me/stores":
+    get:
+      tags:
+        - me
+      summary: Get stores of authenticated user
+      description: ""
+      operationId: getStoresOfAuthenticatedUser
+      parameters: []
+      responses:
+        "200":
+          description: OK
+        "304":
+          description: Not modified
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+    put:
+      tags:
+        - me
+      summary: Update stores of authenticated user
+      description: ""
+      operationId: updateStoresOfAuthenticatedUser
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: "#/components/schemas/Store"
+      responses:
+        "200":
+          description: OK
+        "304":
+          description: Not modified
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+  "/users/me/stores/{store_id}":
+    delete:
+      tags:
+        - me
+      summary: Delete store of authenticated user
+      description: ""
+      operationId: deleteStoreOfAuthenticatedUser
+      parameters:
+        - name: store_id
+          in: path
+          description: ID of store to delete
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: OK
+        "304":
+          description: Not modified
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+  "/users/me/password":
+    put:
+      tags:
+        - me
+      summary: Update password of authenticated user
+      description: ""
+      operationId: updatePasswordOfAuthenticatedUser
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                old_password:
+                  type: string
+                new_password:
+                  type: string
+      responses:
+        "200":
+          description: OK
+        "304":
+          description: Not modified
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+  "/coupons":
+    post:
+      tags:
+        - coupons
+      summary: Update coupons
+      description: ""
+      operationId: updateCoupons
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: "#/components/schemas/Coupon"
+      responses:
+        "200":
+          description: OK
+        "304":
+          description: Not modified
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+  "/users/me/coupons":
+    get:
+      tags:
+        - coupons
+      summary: Get all coupons of authenticated user
+      description: ""
+      operationId: getAllCouponsOfAuthenticatedUser
+      parameters: []
+      responses:
+        "200":
+          description: OK
+        "304":
+          description: Not modified
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+  "/users/me/coupons/{store_id}":
+    get:
+      tags:
+        - coupons
+      summary: Get coupons of authenticated user
+      description: ""
+      operationId: getCouponsOfAuthenticatedUser
+      parameters:
+        - name: store_id
+          in: path
+          description: ID of store to get coupons
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: OK
+        "304":
+          description: Not modified
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+  "/users/me/coupons/{coupon_id}":
+    delete:
+      tags:
+        - coupons
+      summary: Delete coupon of authenticated user
+      description: ""
+      operationId: deleteCouponOfAuthenticatedUser
+      parameters:
+        - name: coupon_id
+          in: path
+          description: ID of coupon to delete
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: OK
+        "304":
+          description: Not modified
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+  "/users/me/favorite_stores":
+    get:
+      tags:
+        - favorite_stores
+      summary: Get favorite stores of authenticated user
+      description: ""
+      operationId: getFavoriteStores
+      parameters: []
+      responses:
+        "200":
+          description: OK
+        "304":
+          description: Not modified
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+    post:
+      tags:
+        - favorite_stores
+      summary: Update favorite stores of authenticated user
+      description: ""
+      operationId: updateFavoriteStores
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: "#/components/schemas/Store"
+      responses:
+        "200":
+          description: OK
+        "304":
+          description: Not modified
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+  "/users/me/favorite_stores/{store_id}":
+    delete:
+      tags:
+        - favorite_stores
+      summary: Delete favorite store of authenticated user
+      description: ""
+      operationId: deleteFavoriteStore
+      parameters:
+        - name: store_id
+          in: path
+          description: ID of store to delete
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: OK
+        "304":
+          description: Not modified
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+  "/stores":
+    post:
+      tags:
+        - stores
+      summary: Update stores
+      description: ""
+      operationId: updateStores
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: "#/components/schemas/Store"
+      responses:
+        "200":
+          description: OK
+        "304":
+          description: Not modified
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+  "/stores/{store_id}":
+    get:
+      tags:
+        - stores
+      summary: Get store
+      description: ""
+      operationId: getStore
+      parameters:
+        - name: store_id
+          in: path
+          description: ID of store to return
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: OK
+        "304":
+          description: Not modified
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+    patch:
+      tags:
+        - stores
+      summary: Update store
+      description: ""
+      operationId: updateStore
+      parameters:
+        - name: store_id
+          in: path
+          description: ID of store to update
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Store"
+      responses:
+        "200":
+          description: OK
+        "304":
+          description: Not modified
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+    delete:
+      tags:
+        - stores
+      summary: Delete store
+      description: ""
+      operationId: deleteStore
+      parameters:
+        - name: store_id
+          in: path
+          description: ID of store to delete
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: OK
+        "304":
+          description: Not modified
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+  "/auth/register":
+    post:
+      tags:
+        - authentication
+      summary: Register user
+      description: ""
+      operationId: registerUser
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/User"
+      responses:
+        "200":
+          description: successful operation
+          headers:
+            X-Rate-Limit:
+              description: calls per hour allowed by the user
+              schema:
+                type: integer
+                format: int32
+            X-Expires-After:
+              description: date in UTC when token expires
+              schema:
+                type: string
+                format: date-time
+          content:
+            application/xml:
+              schema:
+                type: string
+            application/json:
+              schema:
+                type: string
+        "400":
+          description: Invalid user supplied
+  "/auth/login":
+    get:
+      tags:
+        - authentication
+      summary: Logs user into the system
+      description: ""
+      operationId: loginUser
+      parameters:
+        - name: username
+          in: query
+          description: The user name for login
+          required: false
+          schema:
+            type: string
+        - name: password
+          in: query
+          description: The password for login in clear text
+          required: false
+          schema:
+            type: string
+      responses:
+        "200":
+          description: successful operation
+          headers:
+            X-Rate-Limit:
+              description: calls per hour allowed by the user
+              schema:
+                type: integer
+                format: int32
+            X-Expires-After:
+              description: date in UTC when token expires
+              schema:
+                type: string
+                format: date-time
+          content:
+            application/xml:
+              schema:
+                type: string
+            application/json:
+              schema:
+                type: string
+        "400":
+          description: Invalid username/password supplied
+  "/auth/logout":
+    get:
+      tags:
+        - authentication
+      summary: Logs out current logged in user session
+      description: ""
+      operationId: logoutUser
+      parameters: []
+      responses:
+        default:
+          description: successful operation
+components:
+  schemas:
+    User:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          example: "1effdef5-f7be-2cc8-5e0a-ec5c5914dd88"
+        name:
+          type: string
+        email:
+          type: string
+        stores:
+          type: array
+          items:
+            type: string
+            format: uuid
+        password:
+          type: string
+        role:
+          type: string
+          example: "user"
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+    Store:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        name:
+          type: string
+        description:
+          type: string
+        is_public:
+          type: boolean
+        creator_id:
+          type: string
+          format: uuid
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+        deleted_at:
+          type: string
+          format: date-time
+    Coupon:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        store_id:
+          type: string
+          format: uuid
+        name:
+          type: string
+        description:
+          type: string
+        creator_id:
+          type: string
+          format: uuid
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+        deleted_at:
+          type: string
+          format: date-time
+        expires_at:
+          type: string
+          format: date-time
+    UserStore:
+      type: object
+      properties:
+        user_id:
+          type: string
+          format: uuid
+        store_id:
+          type: string
+          format: uuid
+        joined_at:
+          type: string
+          format: date-time
+    FavoriteStore:
+      type: object
+      properties:
+        user_id:
+          type: string
+          format: uuid
+        store_id:
+          type: string
+          format: uuid
+        created_at:
+          type: string
+          format: date-time
+    UserCoupon:
+      type: object
+      properties:
+        user_id:
+          type: string
+          format: uuid
+        coupon_id:
+          type: string
+          format: uuid
+        is_used:
+          type: boolean
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+    UserPoints:
+      type: object
+      properties:
+        user_id:
+          type: string
+          format: uuid
+        store_id:
+          type: string
+          format: uuid
+        points:
+          type: integer
+          format: int32
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+        expires_at:
+          type: string
+          format: date-time
+    Item:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        store_id:
+          type: string
+          format: uuid
+        name:
+          type: string
+        description:
+          type: string
+        price:
+          type: integer
+          format: int32
+        stock:
+          type: integer
+          format: int32
+        creator_id:
+          type: string
+          format: uuid
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+        deleted_at:
+          type: string
+          format: date-time
