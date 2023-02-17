@@ -19,8 +19,8 @@ CREATE TABLE `users` (
   `password` char(128) NOT NULL DEFAULT '',
   -- `icon` char(36) DEFAULT NULL,
   `role` varchar(36) NOT NULL DEFAULT 'user',
-  `created_at` datetime(6) NOT NULL DEFAULT NULL,
-  `updated_at` datetime(6) NOT NULL DEFAULT NULL,
+  `created_at` datetime(6) DEFAULT NULL,
+  `updated_at` datetime(6) DEFAULT NULL,
   PRIMARY KEY (`id`)
 );
 
@@ -31,8 +31,8 @@ CREATE TABLE `stores` (
   `is_public` tinyint(1) NOT NULL DEFAULT 1,
   -- `icon` char(36) DEFAULT NULL,
   `creator_id` char(36) NOT NULL,
-  `created_at` datetime(6) NOT NULL DEFAULT NULL,
-  `updated_at` datetime(6) NOT NULL DEFAULT NULL,
+  `created_at` datetime(6) DEFAULT NULL,
+  `updated_at` datetime(6) DEFAULT NULL,
   `deleted_at` datetime(6) DEFAULT NULL,
   PRIMARY KEY (`id`),
   FOREIGN KEY (`creator_id`) REFERENCES `users` (`id`)
@@ -44,8 +44,8 @@ CREATE TABLE `coupons` (
   `name` varchar(255) NOT NULL,
   `description` text CHARACTER SET utf8mb4 COLLATE utf8mb4_bin,
   `creator_id` char(36) NOT NULL,
-  `created_at` datetime(6) NOT NULL DEFAULT NULL,
-  `updated_at` datetime(6) NOT NULL DEFAULT NULL,
+  `created_at` datetime(6) DEFAULT NULL,
+  `updated_at` datetime(6) DEFAULT NULL,
   `deleted_at` datetime(6) DEFAULT NULL,
   `expires_at` datetime(6) DEFAULT NULL,
   PRIMARY KEY (`id`),
@@ -56,7 +56,7 @@ CREATE TABLE `coupons` (
 CREATE TABLE `user_stores` (
   `user_id` char(36) NOT NULL,
   `store_id` char(36) NOT NULL,
-  `joined_at` datetime(6) NOT NULL DEFAULT NULL,
+  `joined_at` datetime(6) DEFAULT NULL,
   PRIMARY KEY (`user_id`, `store_id`),
   FOREIGN KEY (`user_id`) REFERENCES `users` (`id`),
   FOREIGN KEY (`store_id`) REFERENCES `stores` (`id`)
@@ -65,7 +65,7 @@ CREATE TABLE `user_stores` (
 CREATE TABLE `favorite_stores` (
   `user_id` char(36) NOT NULL,
   `store_id` char(36) NOT NULL,
-  `created_at` datetime(6) NOT NULL DEFAULT NULL,
+  `created_at` datetime(6) DEFAULT NULL,
   PRIMARY KEY (`user_id`, `store_id`),
   FOREIGN KEY (`user_id`) REFERENCES `users` (`id`),
   FOREIGN KEY (`store_id`) REFERENCES `stores` (`id`)
@@ -75,8 +75,8 @@ CREATE TABLE `user_coupons` (
   `user_id` char(36) NOT NULL,
   `coupon_id` char(36) NOT NULL,
   `is_used` tinyint(1) NOT NULL DEFAULT 0,
-  `created_at` datetime(6) NOT NULL DEFAULT NULL,
-  `updated_at` datetime(6) NOT NULL DEFAULT NULL,
+  `created_at` datetime(6) DEFAULT NULL,
+  `updated_at` datetime(6) DEFAULT NULL,
   PRIMARY KEY (`user_id`, `coupon_id`),
   FOREIGN KEY (`user_id`) REFERENCES `users` (`id`),
   FOREIGN KEY (`coupon_id`) REFERENCES `coupons` (`id`)
@@ -86,8 +86,8 @@ CREATE TABLE `user_points` (
   `user_id` char(36) NOT NULL,
   `store_id` char(36) NOT NULL,
   `points` int NOT NULL DEFAULT 0,
-  `created_at` datetime(6) NOT NULL DEFAULT NULL,
-  `updated_at` datetime(6) NOT NULL DEFAULT NULL,
+  `created_at` datetime(6) DEFAULT NULL,
+  `updated_at` datetime(6) DEFAULT NULL,
   `expires_at` datetime(6) DEFAULT NULL,
   PRIMARY KEY (`user_id`, `store_id`),
   FOREIGN KEY (`user_id`) REFERENCES `users` (`id`),
@@ -103,8 +103,8 @@ CREATE TABLE `items` (
   `stock` int NOT NULL DEFAULT 0,
   `is_public` tinyint(1) NOT NULL DEFAULT 1,
   `creator_id` char(36) NOT NULL,
-  `created_at` datetime(6) NOT NULL DEFAULT NULL,
-  `updated_at` datetime(6) NOT NULL DEFAULT NULL,
+  `created_at` datetime(6) DEFAULT NULL,
+  `updated_at` datetime(6) DEFAULT NULL,
   `deleted_at` datetime(6) DEFAULT NULL,
   PRIMARY KEY (`id`),
   FOREIGN KEY (`creator_id`) REFERENCES `users` (`id`),
