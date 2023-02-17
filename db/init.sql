@@ -90,7 +90,7 @@ CREATE TABLE `user_points` (
   `updated_at` datetime(6) NOT NULL DEFAULT NULL,
   `expires_at` datetime(6) DEFAULT NULL,
   PRIMARY KEY (`user_id`, `store_id`),
-  FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)
+  FOREIGN KEY (`user_id`) REFERENCES `users` (`id`),
   FOREIGN KEY (`store_id`) REFERENCES `stores` (`id`)
 )
 
