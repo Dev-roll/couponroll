@@ -1,0 +1,12 @@
+version: '3'
+services:
+  mysql:
+    image: mysql:latest
+    container_name: mysql
+    platform: linux/amd64
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+    volumes:
+      - ./data:/docker-entrypoint-initdb.d
+    ports:
+      - 3306:3306
