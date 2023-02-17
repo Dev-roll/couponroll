@@ -22,7 +22,7 @@ CREATE TABLE `users` (
   `created_at` datetime(6) NOT NULL DEFAULT NULL,
   `updated_at` datetime(6) NOT NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-)
+);
 
 CREATE TABLE `stores` (
   `id` char(36) NOT NULL,
@@ -36,7 +36,7 @@ CREATE TABLE `stores` (
   `deleted_at` datetime(6) DEFAULT NULL,
   PRIMARY KEY (`id`),
   FOREIGN KEY (`creator_id`) REFERENCES `users` (`id`)
-)
+);
 
 CREATE TABLE `coupons` (
   `id` char(36) NOT NULL,
@@ -51,7 +51,7 @@ CREATE TABLE `coupons` (
   PRIMARY KEY (`id`),
   FOREIGN KEY (`creator_id`) REFERENCES `users` (`id`),
   FOREIGN KEY (`store_id`) REFERENCES `stores` (`id`)
-)
+);
 
 CREATE TABLE `user_stores` (
   `user_id` char(36) NOT NULL,
@@ -60,7 +60,7 @@ CREATE TABLE `user_stores` (
   PRIMARY KEY (`user_id`, `store_id`),
   FOREIGN KEY (`user_id`) REFERENCES `users` (`id`),
   FOREIGN KEY (`store_id`) REFERENCES `stores` (`id`)
-)
+);
 
 CREATE TABLE `favorite_stores` (
   `user_id` char(36) NOT NULL,
@@ -69,7 +69,7 @@ CREATE TABLE `favorite_stores` (
   PRIMARY KEY (`user_id`, `store_id`),
   FOREIGN KEY (`user_id`) REFERENCES `users` (`id`),
   FOREIGN KEY (`store_id`) REFERENCES `stores` (`id`)
-)
+);
 
 CREATE TABLE `user_coupons` (
   `user_id` char(36) NOT NULL,
@@ -80,7 +80,7 @@ CREATE TABLE `user_coupons` (
   PRIMARY KEY (`user_id`, `coupon_id`),
   FOREIGN KEY (`user_id`) REFERENCES `users` (`id`),
   FOREIGN KEY (`coupon_id`) REFERENCES `coupons` (`id`)
-)
+);
 
 CREATE TABLE `user_points` (
   `user_id` char(36) NOT NULL,
@@ -90,9 +90,9 @@ CREATE TABLE `user_points` (
   `updated_at` datetime(6) NOT NULL DEFAULT NULL,
   `expires_at` datetime(6) DEFAULT NULL,
   PRIMARY KEY (`user_id`, `store_id`),
-  FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)
+  FOREIGN KEY (`user_id`) REFERENCES `users` (`id`),
   FOREIGN KEY (`store_id`) REFERENCES `stores` (`id`)
-)
+);
 
 CREATE TABLE `items` (
   `id` char(36) NOT NULL,
@@ -109,4 +109,4 @@ CREATE TABLE `items` (
   PRIMARY KEY (`id`),
   FOREIGN KEY (`creator_id`) REFERENCES `users` (`id`),
   FOREIGN KEY (`store_id`) REFERENCES `stores` (`id`)
-)
+);
