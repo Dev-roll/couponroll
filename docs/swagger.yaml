@@ -19,7 +19,7 @@ tags:
   - name: favorite_stores
     description: API for favorite_stores
 paths:
-  "/user/me":
+  "/users/me":
     get:
       tags:
         - me
@@ -45,7 +45,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/User"
+              $ref: "#/components/schemas/PostUserRequest"
       responses:
         "200":
           description: OK
@@ -299,7 +299,7 @@ paths:
     post:
       tags:
         - stores
-      summary: Update stores
+      summary: Create stores
       description: ""
       operationId: updateStores
       parameters: []
@@ -307,9 +307,7 @@ paths:
         content:
           application/json:
             schema:
-              type: array
-              items:
-                $ref: "#/components/schemas/Store"
+              $ref: "#/components/schemas/Store"
       responses:
         "200":
           description: OK
@@ -510,6 +508,18 @@ components:
         updated_at:
           type: string
           format: date-time
+    PostUserRequest:
+      type: object
+      properties:
+        name:
+          type: string
+        email:
+          type: string
+        password:
+          type: string
+        role:
+          type: string
+          example: "user"
     Store:
       type: object
       properties:

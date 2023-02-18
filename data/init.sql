@@ -19,8 +19,8 @@ CREATE TABLE `users` (
   `password` char(128) NOT NULL DEFAULT '',
   -- `icon` char(36) DEFAULT NULL,
   `role` varchar(36) NOT NULL DEFAULT 'user',
-  `created_at` datetime(6) DEFAULT NULL,
-  `updated_at` datetime(6) DEFAULT NULL,
+  `created_at` datetime(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6),
+  `updated_at` datetime(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6) ON UPDATE CURRENT_TIMESTAMP(6),
   PRIMARY KEY (`id`)
 );
 
@@ -32,9 +32,9 @@ CREATE TABLE `stores` (
   `icon_url` varchar(255) NOT NULL DEFAULT 'https://avatars.githubusercontent.com/u/112330481?s=400&u=34b97ce454c3a61d7647cdb147cb207322242319&v=4',
   `img_url` varchar(255) NOT NULL DEFAULT 'https://avatars.githubusercontent.com/u/112330481?s=400&u=34b97ce454c3a61d7647cdb147cb207322242319&v=4',
   `creator_id` char(36) NOT NULL,
-  `created_at` datetime(6) DEFAULT NULL,
-  `updated_at` datetime(6) DEFAULT NULL,
-  `deleted_at` datetime(6) DEFAULT NULL,
+  `created_at` datetime(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6),
+  `updated_at` datetime(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6) ON UPDATE CURRENT_TIMESTAMP(6),
+  -- `deleted_at` datetime(6) DEFAULT NULL,
   PRIMARY KEY (`id`),
   FOREIGN KEY (`creator_id`) REFERENCES `users` (`id`)
 );
@@ -47,9 +47,9 @@ CREATE TABLE `coupons` (
   `img_url` varchar(255) NOT NULL DEFAULT 'https://avatars.githubusercontent.com/u/112330481?s=400&u=34b97ce454c3a61d7647cdb147cb207322242319&v=4',
   `discount` int NOT NULL DEFAULT 0,
   `creator_id` char(36) NOT NULL,
-  `created_at` datetime(6) DEFAULT NULL,
-  `updated_at` datetime(6) DEFAULT NULL,
-  `deleted_at` datetime(6) DEFAULT NULL,
+  `created_at` datetime(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6),
+  `updated_at` datetime(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6) ON UPDATE CURRENT_TIMESTAMP(6),
+  -- `deleted_at` datetime(6) DEFAULT NULL,
   `expires_at` datetime(6) DEFAULT NULL,
   PRIMARY KEY (`id`),
   FOREIGN KEY (`creator_id`) REFERENCES `users` (`id`),
@@ -59,7 +59,7 @@ CREATE TABLE `coupons` (
 CREATE TABLE `user_stores` (
   `user_id` char(36) NOT NULL,
   `store_id` char(36) NOT NULL,
-  `joined_at` datetime(6) DEFAULT NULL,
+  `joined_at` datetime(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6),
   PRIMARY KEY (`user_id`, `store_id`),
   FOREIGN KEY (`user_id`) REFERENCES `users` (`id`),
   FOREIGN KEY (`store_id`) REFERENCES `stores` (`id`)
@@ -68,7 +68,7 @@ CREATE TABLE `user_stores` (
 CREATE TABLE `favorite_stores` (
   `user_id` char(36) NOT NULL,
   `store_id` char(36) NOT NULL,
-  `created_at` datetime(6) DEFAULT NULL,
+  `created_at` datetime(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6),
   PRIMARY KEY (`user_id`, `store_id`),
   FOREIGN KEY (`user_id`) REFERENCES `users` (`id`),
   FOREIGN KEY (`store_id`) REFERENCES `stores` (`id`)
@@ -78,8 +78,8 @@ CREATE TABLE `user_coupons` (
   `user_id` char(36) NOT NULL,
   `coupon_id` char(36) NOT NULL,
   `is_used` tinyint(1) NOT NULL DEFAULT 0,
-  `created_at` datetime(6) DEFAULT NULL,
-  `updated_at` datetime(6) DEFAULT NULL,
+  `created_at` datetime(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6),
+  `updated_at` datetime(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6) ON UPDATE CURRENT_TIMESTAMP(6),
   PRIMARY KEY (`user_id`, `coupon_id`),
   FOREIGN KEY (`user_id`) REFERENCES `users` (`id`),
   FOREIGN KEY (`coupon_id`) REFERENCES `coupons` (`id`)
@@ -89,8 +89,8 @@ CREATE TABLE `user_points` (
   `user_id` char(36) NOT NULL,
   `store_id` char(36) NOT NULL,
   `points` int NOT NULL DEFAULT 0,
-  `created_at` datetime(6) DEFAULT NULL,
-  `updated_at` datetime(6) DEFAULT NULL,
+  `created_at` datetime(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6),
+  `updated_at` datetime(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6) ON UPDATE CURRENT_TIMESTAMP(6),
   `expires_at` datetime(6) DEFAULT NULL,
   PRIMARY KEY (`user_id`, `store_id`),
   FOREIGN KEY (`user_id`) REFERENCES `users` (`id`),
@@ -106,9 +106,9 @@ CREATE TABLE `items` (
   `stock` int NOT NULL DEFAULT 0,
   `is_public` tinyint(1) NOT NULL DEFAULT 1,
   `creator_id` char(36) NOT NULL,
-  `created_at` datetime(6) DEFAULT NULL,
-  `updated_at` datetime(6) DEFAULT NULL,
-  `deleted_at` datetime(6) DEFAULT NULL,
+  `created_at` datetime(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6),
+  `updated_at` datetime(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6) ON UPDATE CURRENT_TIMESTAMP(6),
+  -- `deleted_at` datetime(6) DEFAULT NULL,
   PRIMARY KEY (`id`),
   FOREIGN KEY (`creator_id`) REFERENCES `users` (`id`),
   FOREIGN KEY (`store_id`) REFERENCES `stores` (`id`)
