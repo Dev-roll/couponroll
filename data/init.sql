@@ -75,12 +75,13 @@ CREATE TABLE `favorite_stores` (
 );
 
 CREATE TABLE `user_coupons` (
+  `id` char(36) NOT NULL,
   `user_id` char(36) NOT NULL,
   `coupon_id` char(36) NOT NULL,
   `is_used` tinyint(1) NOT NULL DEFAULT 0,
   `created_at` datetime(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6),
   `updated_at` datetime(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6) ON UPDATE CURRENT_TIMESTAMP(6),
-  PRIMARY KEY (`user_id`, `coupon_id`),
+  PRIMARY KEY (`id`),
   FOREIGN KEY (`user_id`) REFERENCES `users` (`id`),
   FOREIGN KEY (`coupon_id`) REFERENCES `coupons` (`id`)
 );

@@ -76,18 +76,3 @@ func DeleteCoupon(c echo.Context) error {
 	model.DeleteCoupon(model.Coupon{ID: uuid.MustParse(couponID)})
 	return c.NoContent(http.StatusOK)
 }
-
-func GetMyAllCoupons(c echo.Context) error {
-	// TODO: implement
-	return c.NoContent(http.StatusNoContent)
-}
-
-func GetMyCoupons(c echo.Context) error {
-	// TODO: implement
-	return c.NoContent(http.StatusNoContent)
-}
-
-func DeleteMyCoupon(c echo.Context) error {
-	// TODO: implement
-	return c.NoContent(http.StatusNoContent)
-}

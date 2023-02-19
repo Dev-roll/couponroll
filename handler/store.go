@@ -72,18 +72,3 @@ func DeleteStore(c echo.Context) error {
 	model.DeleteStore(model.Store{ID: uuid.MustParse(storeID)})
 	return c.NoContent(http.StatusNoContent)
 }
-
-func GetMyStores(c echo.Context) error {
-	// TODO: implement
-	return nil
-}
-
-func PostMyStore(c echo.Context) error {
-	// TODO: implement
-	return nil
-}
-
-func DeleteMyStore(c echo.Context) error {
-	// TODO: implement
-	return nil
-}
