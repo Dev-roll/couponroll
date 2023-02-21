@@ -19,12 +19,14 @@ func main() {
 	e.POST("/auth/login", handler.Login)
 
 	// stores
+	e.GET("/stores", handler.GetStores)
 	e.POST("/stores", handler.PostStore)
 	e.GET("/stores/:store_id", handler.GetStore)
 	e.PATCH("/stores/:store_id", handler.PatchStore)
 	e.DELETE("/stores/:store_id", handler.DeleteStore)
 
 	// coupons
+	e.GET("/coupons", handler.GetCoupons)
 	e.POST("/coupons", handler.PostCoupon)
 	e.GET("/coupons/:coupon_id", handler.GetCoupon)
 	e.PATCH("/coupons/:coupon_id", handler.PatchCoupon)

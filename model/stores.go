@@ -40,6 +40,14 @@ func GetStoreFromID(s Store) Store {
 	return store
 }
 
+func GetStores() []Store {
+	var stores []Store
+	if err := db.Select(&stores, "SELECT * FROM stores"); err != nil {
+		panic(err)
+	}
+	return stores
+}
+
 func UpdateStore(storeID uuid.UUID, s Store) {
 	if _, err := db.Exec("UPDATE stores SET name=?, description=?, is_public=?, icon_url=?, img_url=? WHERE id=?", s.Name, s.Description, s.IsPublic, s.IconUrl, s.ImgUrl, storeID); err != nil {
 		panic(err)
