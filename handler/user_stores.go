@@ -28,15 +28,11 @@ func GetMyStores(c echo.Context) error {
 
 func PutMyStore(c echo.Context) error {
 	userID := c.Get("userID").(uuid.UUID)
-
-	var req PostUserStoreRequest
-	if err := c.Bind(&req); err != nil {
-		return c.String(http.StatusBadRequest, "bad request")
-	}
+	storeID := c.Param("store_id")
 
 	userStore := model.UserStores{
 		UserID:  userID,
-		StoreID: req.ID,
+		StoreID: uuid.MustParse(storeID),
 	}
 
 	model.CreateUserStore(userStore)

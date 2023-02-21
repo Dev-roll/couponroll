@@ -1,6 +1,7 @@
 package model
 
 import (
+	"fmt"
 	"time"
 
 	"github.com/google/uuid"
@@ -50,14 +51,17 @@ func DeleteUserCoupon(uc UserCoupon) {
 
 func GetUserCouponsFromUserID(userID uuid.UUID) []Coupon {
 	var coupons []Coupon
-	// TODO@notchcoder: Get coupons of the authenticated user
-
+	if err := db.Select(&coupons, "SELECT coupons.* FROM coupons, user_coupons WHERE coupons.id = coupon_id AND user_id=?", userID); err != nil {
+		panic(err)
+	}
+	fmt.Println(coupons)
 	return coupons
 }
 
 func GetUserCouponsFromUserIDByStore(userID uuid.UUID, storeID uuid.UUID) []Coupon {
 	var coupons []Coupon
-	// TODO@notchcoder: Get coupons for store determined by store_id of the authenticated user
-
+	if err := db.Select(&coupons, "SELECT coupons.* FROM coupons, user_coupons WHERE coupons.id = coupon_id AND user_id=? AND store_id=?", userID, storeID); err != nil {
+		panic(err)
+	}
 	return coupons
 }

@@ -48,6 +48,11 @@ func GetCoupon(c echo.Context) error {
 	return c.JSON(http.StatusOK, coupon)
 }
 
+func GetCoupons(c echo.Context) error {
+	coupons := model.GetCoupons()
+	return c.JSON(http.StatusOK, coupons)
+}
+
 func PatchCoupon(c echo.Context) error {
 	couponID := c.Param("coupon_id")
 

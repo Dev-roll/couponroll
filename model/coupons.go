@@ -34,6 +34,14 @@ func CreateCoupon(c Coupon) {
 	}
 }
 
+func GetCoupons() []Coupon {
+	var coupons []Coupon
+	if err := db.Select(&coupons, "SELECT * FROM coupons"); err != nil {
+		panic(err)
+	}
+	return coupons
+}
+
 func GetCouponFromID(c Coupon) Coupon {
 	var coupon Coupon
 	if err := db.Get(&coupon, "SELECT * FROM coupons WHERE id=?", c.ID); err != nil {

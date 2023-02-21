@@ -45,6 +45,11 @@ func GetStore(c echo.Context) error {
 	return c.JSON(http.StatusOK, store)
 }
 
+func GetStores(c echo.Context) error {
+	stores := model.GetStores()
+	return c.JSON(http.StatusOK, stores)
+}
+
 func PatchStore(c echo.Context) error {
 	storeID := c.Param("store_id")
 
